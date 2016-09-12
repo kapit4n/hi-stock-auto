@@ -24,7 +24,7 @@ public class FirstClass {
 		Thread.sleep(3000);
 		login();
 		Thread.sleep(3000);
-		testCompanyShow();
+		/*testCompanyShow();
 		Thread.sleep(3000);
 		testCompanyEdit();
 		Thread.sleep(3000);		
@@ -37,6 +37,16 @@ public class FirstClass {
 		testModuleCreate();
 		Thread.sleep(3000);		
 		testProductorCreate();
+		Thread.sleep(3000);
+		testProductorCreate();
+		Thread.sleep(3000);		
+		testUserCreate();
+		Thread.sleep(3000);		
+		testAccountCreate();
+		Thread.sleep(3000);	
+		testTransaction1Create();
+		Thread.sleep(3000);*/			
+		testTransaction2Create();
 		Thread.sleep(3000);		
 		driver.quit();
 	}
@@ -55,6 +65,7 @@ public class FirstClass {
 	}
 
 	public static void testCompanyEdit() throws InterruptedException {
+		System.out.println("Editing Company");
 		driver.findElement(By.id("company_update")).click();
 		Thread.sleep(2000);
 		driver.findElement(By.id("companyName")).sendKeys("Dyamsoft");
@@ -65,6 +76,7 @@ public class FirstClass {
 	}
 
 	public static void testMeasureCreate() throws InterruptedException {
+		System.out.println("Creating Measure");
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.id("measure"));
 		action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_add"))).click().build().perform();
@@ -80,6 +92,7 @@ public class FirstClass {
 	
 
 	public static void testProductCreate() throws InterruptedException {
+		System.out.println("Creating Product");
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.id("product"));
 		action.moveToElement(we).moveToElement(driver.findElement(By.id("product_add"))).click().build().perform();
@@ -97,6 +110,7 @@ public class FirstClass {
 	}	
 
 	public static void testProveedorCreate() throws InterruptedException {
+		System.out.println("Creating Proveedor");
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.id("proveedor"));
 		action.moveToElement(we).moveToElement(driver.findElement(By.id("proveedor_add"))).click().build().perform();
@@ -112,6 +126,7 @@ public class FirstClass {
 	}
 
 	public static void testModuleCreate() throws InterruptedException {
+		System.out.println("Creating Module");
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.id("module"));
 		action.moveToElement(we).moveToElement(driver.findElement(By.id("module_add"))).click().build().perform();
@@ -126,6 +141,7 @@ public class FirstClass {
 	}
 
 	public static void testProductorCreate() throws InterruptedException {
+		System.out.println("Creating Productor");
 		Actions action = new Actions(driver);
 		WebElement we = driver.findElement(By.id("productor"));
 		action.moveToElement(we).moveToElement(driver.findElement(By.id("productor_add"))).click().build().perform();
@@ -144,5 +160,125 @@ public class FirstClass {
 		driver.findElement(By.id("addSubmit")).click();;
 		System.out.println("Productor was created successsfully");
 	}
-	
+
+	public static void testUserCreate() throws InterruptedException {
+		System.out.println("Creating User");
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("user"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("user_add"))).click().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.id("name")).sendKeys("User Test");
+		driver.findElement(By.id("carnet")).sendKeys("5478745");
+		driver.findElement(By.id("phone")).sendKeys("485697");
+		driver.findElement(By.id("login")).sendKeys("user1");
+		driver.findElement(By.id("password")).sendKeys("user1");
+		driver.findElement(By.id("direccion")).sendKeys("Direccion 2323");
+		driver.findElement(By.id("sueldo")).sendKeys("400");
+		driver.findElement(By.id("type1")).sendKeys("admin");
+		Thread.sleep(2000);
+		driver.findElement(By.id("addSubmit")).click();;
+		System.out.println("User was created successsfully");
+	}
+
+	public static void testAccountCreate() throws InterruptedException {
+		System.out.println("Creating Account");
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("account"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("account_add"))).click().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.id("code")).sendKeys("1.1.1.1");
+		driver.findElement(By.id("name")).sendKeys("Account Test1");
+		driver.findElement(By.id("type")).sendKeys("activo");
+		driver.findElement(By.id("negative")).sendKeys("no");
+		driver.findElement(By.id("parent")).sendKeys("1");
+		driver.findElement(By.id("description")).sendKeys("Description of the account");
+		Thread.sleep(2000);
+		driver.findElement(By.id("addSubmit")).click();;
+		System.out.println("Account was created successsfully");
+	}
+
+	public static void testTransaction1Create() throws InterruptedException {
+		System.out.println("Creating Income Transaction");
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("transaction"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("transaction_add1"))).click().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.id("date")).sendKeys("09/01/2016");
+		driver.findElement(By.id("description")).sendKeys("This is a transaction of Income");
+		Thread.sleep(2000);
+		driver.findElement(By.id("addSubmit")).click();
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("addDetail")).click();
+		Thread.sleep(1000);
+		
+		// Add debit
+		driver.findElement(By.id("accountId")).sendKeys("72");
+		driver.findElement(By.id("debitInput")).sendKeys("1000");
+		Thread.sleep(1000);		
+		driver.findElement(By.id("addSubmit")).click();
+		
+		Thread.sleep(2000);
+		driver.findElement(By.id("goTransaction")).click();
+		Thread.sleep(1000);
+
+		driver.findElement(By.id("addDetail")).click();
+		Thread.sleep(1000);		
+
+		// Add credit detail
+		driver.findElement(By.id("accountId")).sendKeys("32");
+		driver.findElement(By.id("creditInput")).sendKeys("1000");
+		Thread.sleep(1000);		
+		driver.findElement(By.id("addSubmit")).click();
+		Thread.sleep(1000);
+
+		driver.findElement(By.id("goTransaction")).click();
+		Thread.sleep(3000);
+		
+		System.out.println("Income Transaction was created successsfully");
+	}
+
+
+	public static void testTransaction2Create() throws InterruptedException {
+		System.out.println("Creating Egreso Transaction");
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("transaction"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("transaction_add2"))).click().build().perform();
+		Thread.sleep(2000);
+		driver.findElement(By.id("date")).sendKeys("09/01/2016");
+		driver.findElement(By.id("description")).sendKeys("This is OutGoing Transaction");
+		driver.findElement(By.id("receivedBy")).sendKeys("6");
+		driver.findElement(By.id("autorizedBy")).sendKeys("1");
+		Thread.sleep(2000);
+		driver.findElement(By.id("addSubmit")).click();
+		Thread.sleep(3000);
+		
+		driver.findElement(By.id("addDetail")).click();
+		Thread.sleep(2000);
+		
+		// Add debit
+		driver.findElement(By.id("accountId")).sendKeys("72");
+		driver.findElement(By.id("creditInput")).sendKeys("1000");
+		Thread.sleep(1000);		
+		driver.findElement(By.id("addSubmit")).click();
+		
+		Thread.sleep(2000);
+		driver.findElement(By.id("goTransaction")).click();
+		Thread.sleep(1000);
+
+		driver.findElement(By.id("addDetail")).click();
+		Thread.sleep(2000);		
+
+		// Add credit detail
+		driver.findElement(By.id("accountId")).sendKeys("50");
+		driver.findElement(By.id("debitInput")).sendKeys("1000");
+		Thread.sleep(1000);		
+		driver.findElement(By.id("addSubmit")).click();
+		Thread.sleep(1000);
+
+		driver.findElement(By.id("goTransaction")).click();
+		Thread.sleep(3000);
+		
+		System.out.println("Egreso Transaction was created successsfully");
+	}
 }
