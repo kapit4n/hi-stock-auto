@@ -1,5 +1,7 @@
 package automation;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 public class FirstClass {
 
 	static WebDriver driver;
-	
 	
 	public static void login() throws InterruptedException {
 		System.out.println("Successfully opened the website www.Store.Demoqa.com");
@@ -110,7 +111,7 @@ public class FirstClass {
 		driver.findElement(By.id("name")).sendKeys("Productor Test");
 		driver.findElement(By.id("ci")).sendKeys("5478745");
 		driver.findElement(By.id("phone")).sendKeys("485697");
-		driver.findElement(By.id("address")).sendKeys("Simon lopez 1212");
+		driver.findElement(By.id("address")).sendKeys("Av: Blanco Galindo");
 		driver.findElement(By.id("accountId")).sendKeys("1616");
 		driver.findElement(By.id("moduleId")).sendKeys("1");
 		driver.findElement(By.id("acopio")).sendKeys("45");
@@ -174,7 +175,8 @@ public class FirstClass {
 		Thread.sleep(1000);
 		
 		// Add debit
-		(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
+		//(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
+		(new Select(driver.findElement(By.id("accountId")))).selectByVisibleText("1.1.1.1 Account Test1");
 		driver.findElement(By.id("debitInput")).sendKeys("1000");
 		Thread.sleep(1000);		
 		driver.findElement(By.id("addSubmit")).click();
@@ -209,7 +211,9 @@ public class FirstClass {
 		driver.findElement(By.id("date")).sendKeys("09/01/2016");
 		driver.findElement(By.id("description")).sendKeys("This is OutGoing Transaction");
 
-		(new Select(driver.findElement(By.id("receivedBy")))).selectByValue("6");
+		//User Test
+		(new Select(driver.findElement(By.id("receivedBy")))).selectByVisibleText("User Test");
+		//(new Select(driver.findElement(By.id("receivedBy")))).selectByValue("6");
 		(new Select(driver.findElement(By.id("autorizedBy")))).selectByValue("1");
         //dropdown.selectByVisibleText("Programmer ");
 		
@@ -222,7 +226,8 @@ public class FirstClass {
 		Thread.sleep(2000);
 		
 		// Add debit
-		(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
+		(new Select(driver.findElement(By.id("accountId")))).selectByVisibleText("1.1.1.1 Account Test1");
+		//(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
 		driver.findElement(By.id("creditInput")).sendKeys("1000");
 		Thread.sleep(1000);		
 		driver.findElement(By.id("addSubmit")).click();
@@ -326,7 +331,6 @@ public class FirstClass {
 		Thread.sleep(3000);
 		
 		System.out.println("Request Detail was created successsfully");
-		
 
 		driver.findElement(By.id("payModule")).click();
 		Thread.sleep(2000);
@@ -424,6 +428,100 @@ public class FirstClass {
 	}
 
 	
+	public static void selectTr() throws InterruptedException {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("measure"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list"))).click().build().perform();
+		Thread.sleep(2000);
+		WebElement baseTable = driver.findElement(By.id("rows"));
+		
+		List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
+		int quantity = 0;
+		for(WebElement el: tableRows) {
+			if (el.getText().contains("Measure Test")) {
+				quantity++;
+			}
+		}		
+		
+		System.out.println(quantity + " Measures to delete");
+		
+		while (quantity > 0){
+			quantity--;
+			Thread.sleep(3000);
+			action = new Actions(driver);
+			we = driver.findElement(By.id("measure"));
+			Thread.sleep(2000);
+			//action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list"))).click().build().perform();
+			(action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list")))).click();
+			Thread.sleep(2000);
+			baseTable = driver.findElement(By.id("rows"));
+			tableRows = baseTable.findElements(By.tagName("tr"));
+			boolean deleted = false;
+			for(WebElement el: tableRows) {
+				if (!deleted && el.getText().contains("Measure Test")) {
+					deleted = true;
+					List<WebElement> links = el.findElements(By.tagName("a"));
+					boolean actionDelete = false;
+					for (WebElement link : links) {
+						if (!actionDelete && link.getText().equalsIgnoreCase("Eliminar")) {
+							actionDelete = true;
+							link.click();
+							Thread.sleep(2000);
+							System.out.println("Deleted a Measure");
+						}
+					}
+				}
+			}
+		}
+	}
+
+	public static void deleteRow(String module, String tableId, String rowName) throws InterruptedException {
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id(module));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id(module + "_list"))).click().build().perform();
+		Thread.sleep(2000);
+		WebElement baseTable = driver.findElement(By.id(tableId));
+		
+		List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
+		int quantity = 0;
+		for(WebElement el: tableRows) {
+			if (el.getText().contains(rowName)) {
+				quantity++;
+			}
+		}		
+		
+		System.out.println((quantity + 1) + " " + module + "s to delete");
+		
+		while (quantity > 0){
+			quantity--;
+			Thread.sleep(3000);
+			action = new Actions(driver);
+			we = driver.findElement(By.id(module));
+			Thread.sleep(2000);
+			(action.moveToElement(we).moveToElement(driver.findElement(By.id(module + "_list")))).click();
+			Thread.sleep(2000);
+			baseTable = driver.findElement(By.id(tableId));
+			tableRows = baseTable.findElements(By.tagName("tr"));
+			boolean deleted = false;
+			for(WebElement el: tableRows) {
+				if (!deleted && el.getText().contains(rowName)) {
+					deleted = true;
+					List<WebElement> links = el.findElements(By.tagName("a"));
+					boolean actionDelete = false;
+					for (WebElement link : links) {
+						if (!actionDelete && link.getText().equalsIgnoreCase("Eliminar")) {
+							actionDelete = true;
+							link.click();
+							Thread.sleep(2000);
+							System.out.println("Deleted the " + quantity + " " + module);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	
 	public static void main(String[] args) throws InterruptedException {
 
 		// Create a new instance of the Firefox driver
@@ -438,8 +536,8 @@ public class FirstClass {
 		// Wait for 5 Sec
 		Thread.sleep(3000);
 		login();
-		Thread.sleep(3000);
-		/*testCompanyShow();
+		/*Thread.sleep(3000);
+		testCompanyShow();
 		Thread.sleep(3000);
 		testCompanyEdit();
 		Thread.sleep(3000);		
@@ -460,16 +558,20 @@ public class FirstClass {
 		testAccountCreate();
 		Thread.sleep(3000);	
 		testTransaction1Create();
-		Thread.sleep(3000);			
+		Thread.sleep(3000);	
 		testTransaction2Create();
 		Thread.sleep(3000);
 		testVeterinariaCreate();
 		Thread.sleep(3000);
 		testInsumoRequestCreate();
-		Thread.sleep(3000);*/
+		Thread.sleep(3000);
 		
 		testDiscountCreate();
 		Thread.sleep(3000);
+		*/
+		Thread.sleep(3000);	
+		deleteRow("proveedor", "rows", "Proveedor Test");
+
 		driver.quit();
 	}
 }
