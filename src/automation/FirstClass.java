@@ -12,9 +12,62 @@ import org.openqa.selenium.support.ui.Select;
 public class FirstClass {
 
 	static WebDriver driver;
+
+	public static void main(String[] args) throws InterruptedException {
+
+		// Create a new instance of the Firefox driver
+		// String exePath = "D:\\projects\\aut-example\\chromedriver.exe";
+		String exePath = "/home/larce/projects/hello-selenium/geckodriver";
+		System.setProperty("webdriver.gecko.driver", exePath);
+		// WebDriver driver = new ChromeDriver();
+		driver = new FirefoxDriver();
+
+		driver.get("http://localhost:8081");
+
+		// Wait for 5 Sec
+		Thread.sleep(3000);
+		login();
+		Thread.sleep(3000);
+		//testCompanyShow();
+		//Thread.sleep(3000);
+		testCompanyEdit();
+		Thread.sleep(3000);
+		/*testMeasureCreate();
+		Thread.sleep(3000);		
+		testProductCreate();
+		Thread.sleep(3000);		
+		testProveedorCreate();
+		Thread.sleep(3000);		
+		testModuleCreate();
+		Thread.sleep(3000);		
+		testProductorCreate();
+		Thread.sleep(3000);
+		testProductorCreate();
+		Thread.sleep(3000);		
+		testUserCreate();
+		Thread.sleep(3000);		
+		testAccountCreate();
+		Thread.sleep(3000);	
+		testTransaction1Create();
+		Thread.sleep(3000);	
+		testTransaction2Create();
+		Thread.sleep(3000);
+		testVeterinariaCreate();
+		Thread.sleep(3000);
+		testInsumoRequestCreate();
+		Thread.sleep(3000);
+		
+		testDiscountCreate();
+		Thread.sleep(3000);
+		*/
+		Thread.sleep(3000);	
+		//deleteRow("proveedor", "rows", "Proveedor Test");
+
+		driver.quit();
+	}
 	
 	public static void login() throws InterruptedException {
-		System.out.println("Successfully opened the website www.Store.Demoqa.com");
+		System.out.println("Successfully opened hi stock");
 		Thread.sleep(5000);
 		driver.findElement(By.id("login")).sendKeys("admin");
 		driver.findElement(By.id("password")).sendKeys("admin");
@@ -23,18 +76,24 @@ public class FirstClass {
 	}
 	
 	public static void testCompanyShow() {
-		driver.findElement(By.id("company")).click();
+		driver.findElement(By.id("setting")).click();
 	}
 
 	public static void testCompanyEdit() throws InterruptedException {
 		System.out.println("Editing Company");
-		driver.findElement(By.id("company_update")).click();
+
+		Actions action = new Actions(driver);
+		WebElement we = driver.findElement(By.id("setting"));
+		action.moveToElement(we).moveToElement(driver.findElement(By.id("setting_update"))).click().build().perform();
 		Thread.sleep(2000);
-		driver.findElement(By.id("companyName")).sendKeys("Dyamsoft");
+		
+		// driver.findElement(By.id("setting_update")).click();
+		// Thread.sleep(2000);
+		driver.findElement(By.id("settingName")).sendKeys("Dyamsoft");
 		driver.findElement(By.id("president")).sendKeys("Juan Salinas");
-		driver.findElement(By.id("description")).sendKeys("Dyamsoft is a sofwtare development company");
+		driver.findElement(By.id("description")).sendKeys("Dyamsoft is a software development company");
 		Thread.sleep(2000);
-		driver.findElement(By.id("updateSubmit")).click();;
+		driver.findElement(By.id("updateSubmit")).click();
 	}
 
 	public static void testMeasureCreate() throws InterruptedException {
@@ -521,57 +580,4 @@ public class FirstClass {
 		}
 	}
 
-	
-	public static void main(String[] args) throws InterruptedException {
-
-		// Create a new instance of the Firefox driver
-		// String exePath = "D:\\projects\\aut-example\\chromedriver.exe";
-		String exePath = "/home/llll/projects/hello-selenium/geckodriver";
-		System.setProperty("webdriver.gecko.driver", exePath);
-		// WebDriver driver = new ChromeDriver();
-		driver = new FirefoxDriver();
-
-		driver.get("http://localhost:8081");
-
-		// Wait for 5 Sec
-		Thread.sleep(3000);
-		login();
-		/*Thread.sleep(3000);
-		testCompanyShow();
-		Thread.sleep(3000);
-		testCompanyEdit();
-		Thread.sleep(3000);		
-		testMeasureCreate();
-		Thread.sleep(3000);		
-		testProductCreate();
-		Thread.sleep(3000);		
-		testProveedorCreate();
-		Thread.sleep(3000);		
-		testModuleCreate();
-		Thread.sleep(3000);		
-		testProductorCreate();
-		Thread.sleep(3000);
-		testProductorCreate();
-		Thread.sleep(3000);		
-		testUserCreate();
-		Thread.sleep(3000);		
-		testAccountCreate();
-		Thread.sleep(3000);	
-		testTransaction1Create();
-		Thread.sleep(3000);	
-		testTransaction2Create();
-		Thread.sleep(3000);
-		testVeterinariaCreate();
-		Thread.sleep(3000);
-		testInsumoRequestCreate();
-		Thread.sleep(3000);
-		
-		testDiscountCreate();
-		Thread.sleep(3000);
-		*/
-		Thread.sleep(3000);	
-		deleteRow("proveedor", "rows", "Proveedor Test");
-
-		driver.quit();
-	}
 }
