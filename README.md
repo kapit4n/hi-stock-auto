@@ -25,3 +25,4 @@ This is a script made in java and selenium to test hi-stock functionality.
 * Create Account()
 * Create Transaction1()
 * Create Transaction2()
+* Show All Reports
