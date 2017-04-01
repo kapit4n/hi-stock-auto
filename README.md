@@ -1,29 +1,27 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This is a script made in java and selenium to test hi-stock functionality.
 
 ### How do I get set up? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* Open with exlipse
+* Download library (3.3.1)http://www.seleniumhq.org/download/
+* Updated dependencies on eclipse
+* Redirect chrome or firefox drivers to work with it
+* Run the main class
 
-### Contribution guidelines ###
+### Tests implemented ###
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+* Login
+* Show Company()
+* Edit Company()
+* Create Measure()
+* Create Product()
+* Create Vendor()
+* Create Module()
+* Create tCustomer()
+* Create User()
+* Create Account()
+* Create Transaction1()
+* Create Transaction2()
