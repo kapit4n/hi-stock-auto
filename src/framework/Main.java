@@ -1,4 +1,4 @@
-package automation;
+package framework;
 
 import java.util.List;
 
@@ -12,13 +12,14 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Main {
 
-    static WebDriver driver;
-    static String host = "http://localhost:8081";
+    public static String host = "http://localhost:8081";
+
+	static WebDriver driver;
     static int delayTime3000 = 3000;
     static int delayTime2000 = 2000;
     static int delayTime5000 = 5000;
     /*
-        static String browserDriverPath = "D:\\drivers\\chromedriver.exe";
+        static String browserDriverPath = "D:\\drivers\\chromedriver.exe"; // windows example
     */
     static String browserDriverPath = "/home/larce/projects/hello-selenium/geckodriver";
 
