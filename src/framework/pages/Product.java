@@ -1,7 +1,5 @@
 package framework.pages;
 
-import org.junit.Assert;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -26,24 +24,70 @@ public class Product {
 	
 	public void loadFromForm() {
 		driver.get(Main.host + "/product_show/" + this.productId);
-		this.name = driver.findElement(By.id("name")).getText();
-		this.cost = driver.findElement(By.id("cost")).getText();
-		this.percent = driver.findElement(By.id("percent")).getText();
-		this.measureId = driver.findElement(By.id("measureId")).getText();
-		this.currentAmount = driver.findElement(By.id("currentAmount")).getText();
-		this.description = driver.findElement(By.id("description")).getText();
-		this.type = driver.findElement(By.id("type")).getText();		
+		this.setName(driver.findElement(By.id("name")).getText());
+		this.setCost(driver.findElement(By.id("cost")).getText());
+		this.setPercent(driver.findElement(By.id("percent")).getText());
+		this.setMeasureId(driver.findElement(By.id("measureId")).getText());
+		this.setCurrentAmount(driver.findElement(By.id("currentAmount")).getText());
+		this.setDescription(driver.findElement(By.id("description")).getText());
+		this.setType(driver.findElement(By.id("type")).getText());		
 	}
-	
-	@Test
-	public void checkData() {
-		Assert.assertEquals(this.name, "Product Test");
-		Assert.assertEquals(this.cost, "10");
-		Assert.assertEquals(this.percent, "0.1");
-		Assert.assertEquals(this.measureId, "1");
-		Assert.assertEquals(this.currentAmount, "100");
-		Assert.assertEquals(this.description, "This is produt test");
-		Assert.assertEquals(this.type, "1");		
+
+	public String getName() {
+		return name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCost() {
+		return cost;
+	}
+
+	public void setCost(String cost) {
+		this.cost = cost;
+	}
+
+	public String getPercent() {
+		return percent;
+	}
+
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
+
+	public String getMeasureId() {
+		return measureId;
+	}
+
+	public void setMeasureId(String measureId) {
+		this.measureId = measureId;
+	}
+
+	public String getCurrentAmount() {
+		return currentAmount;
+	}
+
+	public void setCurrentAmount(String currentAmount) {
+		this.currentAmount = currentAmount;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 
 }

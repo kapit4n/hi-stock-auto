@@ -14,7 +14,7 @@ public class Main {
 
     public static String host = "http://localhost:8081";
 
-	static WebDriver driver;
+	public static WebDriver driver;
     static int delayTime3000 = 3000;
     static int delayTime2000 = 2000;
     static int delayTime5000 = 5000;
