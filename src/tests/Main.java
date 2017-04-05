@@ -1,4 +1,5 @@
-package framework;
+package tests;
+
 
 import java.util.List;
 
@@ -15,45 +16,79 @@ public class Main {
     public static String host = "http://localhost:8081";
 
 	public static WebDriver driver;
-    static int delayTime3000 = 3000;
-    static int delayTime2000 = 2000;
-    static int delayTime5000 = 5000;
+    public static int delayTime2000 = 2000;
+    public static int delayTime3000 = 3000;
+    public static int delayTime5000 = 5000;
     /*
         static String browserDriverPath = "D:\\drivers\\chromedriver.exe"; // windows example
     */
     static String browserDriverPath = "/home/larce/projects/hello-selenium/geckodriver";
 
     public static void main(String[] args) throws InterruptedException {
+        loadDriverConfig();
+        histockLogin();
+        //runTest();
+        runTest2();
+        driver.quit();
+    }
 
+    public static void wait3000() throws InterruptedException {
+        Thread.sleep(delayTime3000);
+    }
+
+    private static void runTest2() throws InterruptedException {
+    	ProductTest p = new ProductTest();
+    	p.saveData();
+    }
+
+    private static void loadDriverConfig() throws InterruptedException {
         if (browserDriverPath.contains("geckodriver")) {
             System.out.println("Staring firefox browser to test hi-stock system");
             System.setProperty("webdriver.gecko.driver", browserDriverPath);
             driver = new FirefoxDriver();
         } else if (browserDriverPath.contains("chromedriver")) {
-        	System.out.println("Staring Chrome browser to test hi-stock system");
+            System.out.println("Staring Chrome browser to test hi-stock system");
             System.setProperty("webdriver.chrome.driver", browserDriverPath);
             driver = new ChromeDriver();
         }
+    }
 
-        driver.get(host);
+    private static void histockLogin() throws InterruptedException {
         Thread.sleep(delayTime3000);
         login();
+    }
+
+    private static void runTest() throws InterruptedException {
+        boolean createInititalData = false;
+        if (createInititalData) {
+            Thread.sleep(delayTime3000);
+            testCompanyShow();
+            Thread.sleep(delayTime3000);
+            testCompanyEdit();
+            Thread.sleep(delayTime3000);
+            testMeasureCreate();
+            Thread.sleep(delayTime3000);
+            testProductCreate();
+            Thread.sleep(delayTime3000);
+            testVendorCreate();
+            Thread.sleep(delayTime3000);
+            testCustomerCreate();
+            Thread.sleep(delayTime3000);
+            testUserCreate();
+            Thread.sleep(delayTime3000);
+            testAccountCreate();            
+        }
+
+        for (int i = 0;i < 10 ; i++) {
+            run();
+        }
+
+        showAllReports();
         Thread.sleep(delayTime3000);
-        testCompanyShow();
-        Thread.sleep(delayTime3000);
-        testCompanyEdit();
-        Thread.sleep(delayTime3000);
-        testMeasureCreate();
-        Thread.sleep(delayTime3000);
-        testProductCreate();
-        Thread.sleep(delayTime3000);
-        testVendorCreate();
-        Thread.sleep(delayTime3000);
-        testCustomerCreate();
-        Thread.sleep(delayTime3000);
-        testUserCreate();
-        Thread.sleep(delayTime3000);
-        testAccountCreate();
+        deleteRow("proveedor", "rows", "Vendor Test");
+    }
+
+    private static void run() throws InterruptedException {
         Thread.sleep(delayTime3000);
         testTransaction1Create();
         Thread.sleep(delayTime3000);
@@ -61,14 +96,11 @@ public class Main {
         Thread.sleep(delayTime3000);
         testInsumoRequestCreate();
         Thread.sleep(delayTime3000);
-        showAllReports();
-        Thread.sleep(delayTime3000);
-        deleteRow("proveedor", "rows", "Vendor Test");
-        driver.quit();
     }
     
     public static void login() throws InterruptedException {
         System.out.println("Successfully opened hi stock");
+        driver.get(host);
         Thread.sleep(delayTime5000);
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).sendKeys("admin");
@@ -114,6 +146,7 @@ public class Main {
         driver.findElement(By.id("cost")).sendKeys("10");
         driver.findElement(By.id("percent")).sendKeys("0.1");
         driver.findElement(By.id("measureId")).sendKeys("1");
+        driver.findElement(By.id("stockLimit")).sendKeys("10");
         driver.findElement(By.id("currentAmount")).sendKeys("100");
         driver.findElement(By.id("description")).sendKeys("This a product test");
         driver.findElement(By.id("type")).sendKeys("1");
@@ -146,7 +179,7 @@ public class Main {
         driver.findElement(By.id("address")).sendKeys("Av: Blanco Galindo");
         driver.findElement(By.id("accountId")).sendKeys("1616");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
         System.out.println("Productor was created successsfully");
     }
 
@@ -159,7 +192,7 @@ public class Main {
         driver.findElement(By.id("phone")).sendKeys("485697");
         driver.findElement(By.id("login")).sendKeys("user1");
         driver.findElement(By.id("password")).sendKeys("user1");
-        driver.findElement(By.id("direccion")).sendKeys("Direccion 2323");
+        driver.findElement(By.id("address")).sendKeys("Direccion 2323");
         driver.findElement(By.id("Salary")).sendKeys("400");
         driver.findElement(By.id("type1")).sendKeys("admin");
         Thread.sleep(delayTime2000);
@@ -199,11 +232,11 @@ public class Main {
         // Add debit
         //(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
         (new Select(driver.findElement(By.id("accountId")))).selectByVisibleText("1.1.1.1 Account Test1");
-        driver.findElement(By.id("debitInput")).sendKeys("2000");
+        driver.findElement(By.id("debitInput")).sendKeys("1000");
         Thread.sleep(delayTime2000);     
         driver.findElement(By.id("addSubmit")).click();
         
-        Thread.sleep(delayTime2000);
+        Thread.sleep(delayTime3000);
         driver.findElement(By.id("goTransaction")).click();
         Thread.sleep(delayTime2000);
 
@@ -299,16 +332,14 @@ public class Main {
         driver.findElement(By.id("addCustomer")).click();
         Thread.sleep(delayTime2000);
         System.out.println("Add customer payment");
-        driver.findElement(By.id("search")).sendKeys("Productor Test");
+        driver.findElement(By.id("search")).sendKeys("Daniel Campos");
         driver.findElement(By.id("searchSubmit")).click();
         Thread.sleep(delayTime3000);
         
         // Setting the values
         driver.findElement(By.id("quantity")).sendKeys("100");
         driver.findElement(By.id("price")).sendKeys("20");
-        driver.findElement(By.id("totalPrice")).sendKeys("200");
         driver.findElement(By.id("paid")).sendKeys("100");
-        driver.findElement(By.id("credit")).sendKeys("100");
         (new Select(driver.findElement(By.id("measureId")))).selectByVisibleText("Measure Test");
         driver.findElement(By.id("observation")).sendKeys("paid 100");
         
@@ -440,5 +471,9 @@ public class Main {
             }
         }
     }
+
+	public static void wait5000() throws InterruptedException {
+		Thread.sleep(delayTime5000);
+	}
 
 }

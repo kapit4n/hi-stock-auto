@@ -1,22 +1,21 @@
 package tests;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import framework.Main;
-import framework.pages.Product;
+import framework.pages.ProductCreatePage;
 
 public class ProductTest {
 
-	@Test
-	public void checkData() {
-		Product p = new Product("1", Main.driver);
-		Assert.assertEquals(p.getName(), "Product Test");
-		Assert.assertEquals(p.getCost(), "10");
-		Assert.assertEquals(p.getPercent(), "0.1");
-		Assert.assertEquals(p.getMeasureId(), "1");
-		Assert.assertEquals(p.getCurrentAmount(), "100");
-		Assert.assertEquals(p.getDescription(), "This is produt test");
-		Assert.assertEquals(p.getType(), "1");
-	}
+    @Test
+    public void saveData() throws InterruptedException {
+        ProductCreatePage p = new ProductCreatePage();
+        p.setName("product Tests");
+        p.setPercent("0.1");
+        p.setCost("10");
+        p.setCurrentAmount("500");
+        p.setDescription("This is product description");
+        p.setMeasureId("1");
+        p.setStockLimit("10");
+        p.clickSubmit();
+    }
 }
