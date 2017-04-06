@@ -105,7 +105,7 @@ public class Main {
         driver.findElement(By.id("password")).sendKeys("admin");
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("submitLogin")).click();
-        ;
+        Thread.sleep(delayTime3000);
     }
 
     public static void testCompanyShow() {

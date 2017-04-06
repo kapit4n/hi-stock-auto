@@ -2,27 +2,27 @@ package framework.pages;
 
 import org.openqa.selenium.WebElement;
 
-public class CustomerCreatePage extends CreatePage {
+public class VendorCreatePage extends CreatePage {
     private WebElement name;
-    private WebElement ci;
     private WebElement phone;
     private WebElement address;
+    private WebElement contact;
     private WebElement account;
 
     public String getUri(){
-        return "/customer_add";
+        return "/vendor_add";
     }
 
-    public CustomerCreatePage() throws InterruptedException {
+    public VendorCreatePage() throws InterruptedException {
         super();
     }
 
     public void loadElements() {
         super.loadElements();
         name = loadById("name");
-        ci = loadById("ci");
         phone = loadById("phone");
         address = loadById("address");
+        contact = loadById("contact");
         account = loadById("account");
     }
 
@@ -32,14 +32,6 @@ public class CustomerCreatePage extends CreatePage {
 
     public String getName() {
         return this.name.getText();
-    }
-
-    public String getCi() {
-        return ci.getText();
-    }
-
-    public void setCi(String ci) {
-        this.ci.sendKeys(ci);
     }
 
     public String getPhone() {
@@ -56,6 +48,14 @@ public class CustomerCreatePage extends CreatePage {
 
     public void setAddress(String address) {
         this.address.sendKeys(address);
+    }
+
+    public String getContact() {
+        return contact.getText();
+    }
+
+    public void setContact(String contact) {
+        this.contact.sendKeys(contact);
     }
 
     public String getAccount() {
