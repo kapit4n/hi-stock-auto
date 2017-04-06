@@ -36,7 +36,7 @@ public class Main {
     }
 
     private static void runTest2() throws InterruptedException {
-        ProductTest p = new ProductTest();
+        UserTest p = new UserTest();
         p.saveData();
     }
 
@@ -195,8 +195,8 @@ public class Main {
         driver.findElement(By.id("login")).sendKeys("user1");
         driver.findElement(By.id("password")).sendKeys("user1");
         driver.findElement(By.id("address")).sendKeys("Direccion 2323");
-        driver.findElement(By.id("Salary")).sendKeys("400");
-        driver.findElement(By.id("type1")).sendKeys("admin");
+        driver.findElement(By.id("salary")).sendKeys("400");
+        driver.findElement(By.id("typeId")).sendKeys("admin");
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
         ;
