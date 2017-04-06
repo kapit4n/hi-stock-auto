@@ -5,14 +5,16 @@ import org.openqa.selenium.WebElement;
 public class ProductCreatePage extends CreatePage {
     private WebElement name;
     private WebElement cost;
+    private WebElement price;
     private WebElement percent;
     private WebElement measureId;
+    private WebElement measure;
     private WebElement currentAmount;
     private WebElement description;
     private WebElement stockLimit;
 
     public String getUri(){
-    	return "/product_add";
+        return "/product_add";
     }
 
     public ProductCreatePage() throws InterruptedException {
@@ -25,9 +27,27 @@ public class ProductCreatePage extends CreatePage {
         cost = loadById("cost");
         percent = loadById("percent");
         measureId = loadById("measureId");
+        measure = loadById("measure");
+        price = loadById("price");
         currentAmount = loadById("currentAmount");
         description = loadById("description");
         stockLimit = loadById("stockLimit");
+    }
+
+    public String getPrice() {
+        return price.getText();
+    }
+
+    public void setPrice(String price) {
+        this.price.sendKeys(price);
+    }
+
+    public String getMeasure() {
+        return measure.getText();
+    }
+
+    public void setMeasure(String measure) {
+        this.measure.sendKeys(measure);
     }
 
     public void setName(String name) {

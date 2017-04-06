@@ -1,6 +1,5 @@
 package tests;
 
-
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -15,19 +14,19 @@ public class Main {
 
     public static String host = "http://localhost:8081";
 
-	public static WebDriver driver;
+    public static WebDriver driver;
     public static int delayTime2000 = 2000;
     public static int delayTime3000 = 3000;
     public static int delayTime5000 = 5000;
     /*
-        static String browserDriverPath = "D:\\drivers\\chromedriver.exe"; // windows example
-    */
+     * static String browserDriverPath = "D:\\drivers\\chromedriver.exe"; //
+     * windows example
+     */
     static String browserDriverPath = "/home/larce/projects/hello-selenium/geckodriver";
 
     public static void main(String[] args) throws InterruptedException {
-        loadDriverConfig();
-        histockLogin();
-        //runTest();
+        setup();
+        // runTest();
         runTest2();
         driver.quit();
     }
@@ -37,11 +36,11 @@ public class Main {
     }
 
     private static void runTest2() throws InterruptedException {
-    	ProductTest p = new ProductTest();
-    	p.saveData();
+        ProductTest p = new ProductTest();
+        p.saveData();
     }
 
-    private static void loadDriverConfig() throws InterruptedException {
+    static void loadDriverConfig() throws InterruptedException {
         if (browserDriverPath.contains("geckodriver")) {
             System.out.println("Staring firefox browser to test hi-stock system");
             System.setProperty("webdriver.gecko.driver", browserDriverPath);
@@ -53,7 +52,7 @@ public class Main {
         }
     }
 
-    private static void histockLogin() throws InterruptedException {
+    static void histockLogin() throws InterruptedException {
         Thread.sleep(delayTime3000);
         login();
     }
@@ -76,10 +75,10 @@ public class Main {
             Thread.sleep(delayTime3000);
             testUserCreate();
             Thread.sleep(delayTime3000);
-            testAccountCreate();            
+            testAccountCreate();
         }
 
-        for (int i = 0;i < 10 ; i++) {
+        for (int i = 0; i < 10; i++) {
             run();
         }
 
@@ -97,7 +96,7 @@ public class Main {
         testInsumoRequestCreate();
         Thread.sleep(delayTime3000);
     }
-    
+
     public static void login() throws InterruptedException {
         System.out.println("Successfully opened hi stock");
         driver.get(host);
@@ -105,9 +104,10 @@ public class Main {
         driver.findElement(By.id("login")).sendKeys("admin");
         driver.findElement(By.id("password")).sendKeys("admin");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("submitLogin")).click();;      
+        driver.findElement(By.id("submitLogin")).click();
+        ;
     }
-    
+
     public static void testCompanyShow() {
         driver.findElement(By.id("setting")).click();
     }
@@ -126,17 +126,17 @@ public class Main {
     public static void testMeasureCreate() throws InterruptedException {
         System.out.println("Creating Measure");
         driver.get(host + "/measure_add");
-        
+
         Thread.sleep(delayTime3000);
         driver.findElement(By.id("name")).sendKeys("Measure Test");
         driver.findElement(By.id("quantity")).sendKeys("1");
         driver.findElement(By.id("description")).sendKeys("Measure Test");
         driver.findElement(By.id("measureParent")).sendKeys("16");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
+        ;
         System.out.println("Measure was created successsfully");
     }
-    
 
     public static void testProductCreate() throws InterruptedException {
         System.out.println("Creating Product");
@@ -151,9 +151,10 @@ public class Main {
         driver.findElement(By.id("description")).sendKeys("This a product test");
         driver.findElement(By.id("type")).sendKeys("1");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
+        ;
         System.out.println("Product was created successsfully");
-    }   
+    }
 
     public static void testVendorCreate() throws InterruptedException {
         System.out.println("Creating Vendor");
@@ -165,13 +166,14 @@ public class Main {
         driver.findElement(By.id("contact")).sendKeys("Juan Pablo");
         driver.findElement(By.id("accountValue")).sendKeys("555");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
+        ;
         System.out.println("Vendor was created successsfully");
     }
 
     public static void testCustomerCreate() throws InterruptedException {
         System.out.println("Creating Productor");
-        driver.get(host + "/customer_add");    
+        driver.get(host + "/customer_add");
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("name")).sendKeys("Productor Test");
         driver.findElement(By.id("ci")).sendKeys("5478745");
@@ -196,7 +198,8 @@ public class Main {
         driver.findElement(By.id("Salary")).sendKeys("400");
         driver.findElement(By.id("type1")).sendKeys("admin");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
+        ;
         System.out.println("User was created successsfully");
     }
 
@@ -207,12 +210,13 @@ public class Main {
         driver.findElement(By.id("code")).sendKeys("1.1.1.1");
         driver.findElement(By.id("name")).sendKeys("Account Test1");
         (new Select(driver.findElement(By.id("type")))).selectByVisibleText("ACTIVO");
-        //driver.findElement(By.id("type")).sendKeys("ACTIVO");
+        // driver.findElement(By.id("type")).sendKeys("ACTIVO");
         driver.findElement(By.id("negative")).sendKeys("NO");
         (new Select(driver.findElement(By.id("parent")))).selectByValue("1");
         driver.findElement(By.id("description")).sendKeys("Description of the account");
         Thread.sleep(delayTime2000);
-        driver.findElement(By.id("addSubmit")).click();;
+        driver.findElement(By.id("addSubmit")).click();
+        ;
         System.out.println("Account was created successsfully");
     }
 
@@ -225,37 +229,37 @@ public class Main {
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime3000);
-        
+
         driver.findElement(By.id("addDetail")).click();
         Thread.sleep(delayTime2000);
-        
+
         // Add debit
-        //(new Select(driver.findElement(By.id("accountId")))).selectByValue("72");
+        // (new
+        // Select(driver.findElement(By.id("accountId")))).selectByValue("72");
         (new Select(driver.findElement(By.id("accountId")))).selectByVisibleText("1.1.1.1 Account Test1");
         driver.findElement(By.id("debitInput")).sendKeys("1000");
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
-        
+
         Thread.sleep(delayTime3000);
         driver.findElement(By.id("goTransaction")).click();
         Thread.sleep(delayTime2000);
 
         driver.findElement(By.id("addDetail")).click();
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
 
         // Add credit detail
         (new Select(driver.findElement(By.id("accountId")))).selectByValue("32");
         driver.findElement(By.id("creditInput")).sendKeys("1000");
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime2000);
 
         driver.findElement(By.id("goTransaction")).click();
         Thread.sleep(delayTime3000);
-        
+
         System.out.println("Income Transaction was created successsfully");
     }
-
 
     public static void testTransaction2Create() throws InterruptedException {
         System.out.println("Creating Egreso Transaction");
@@ -264,46 +268,43 @@ public class Main {
         driver.findElement(By.id("date")).sendKeys("09/01/2016");
         driver.findElement(By.id("description")).sendKeys("This is OutGoing Transaction");
 
-        //User Test
+        // User Test
         (new Select(driver.findElement(By.id("receivedBy")))).selectByVisibleText("User Test");
         (new Select(driver.findElement(By.id("autorizedBy")))).selectByValue("1");
-        
-        
+
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime3000);
-        
+
         driver.findElement(By.id("addDetail")).click();
         Thread.sleep(delayTime2000);
-        
+
         // Add debit
         (new Select(driver.findElement(By.id("accountId")))).selectByVisibleText("1.1.1.1 Account Test1");
         driver.findElement(By.id("creditInput")).sendKeys("1000");
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
-        
+
         Thread.sleep(delayTime2000);
         driver.findElement(By.id("goTransaction")).click();
         Thread.sleep(delayTime2000);
 
         driver.findElement(By.id("addDetail")).click();
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
 
         // Add credit detail
         (new Select(driver.findElement(By.id("accountId")))).selectByValue("50");
         driver.findElement(By.id("debitInput")).sendKeys("1000");
-        Thread.sleep(delayTime2000);     
+        Thread.sleep(delayTime2000);
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime2000);
 
         driver.findElement(By.id("goTransaction")).click();
         Thread.sleep(delayTime3000);
-        
+
         System.out.println("Egreso Transaction was created successsfully");
     }
-    
-    
-    
+
     public static void testInsumoRequestCreate() throws InterruptedException {
         System.out.println("Creating Product Request By Insumo");
         driver.get(host + "/productRequest_add");
@@ -316,7 +317,7 @@ public class Main {
         driver.findElement(By.id("addSubmit")).click();
         System.out.println("Product Request By Insumo was created successsfully");
         Thread.sleep(delayTime3000);
-        
+
         driver.findElement(By.id("addDetail")).click();
         Thread.sleep(delayTime2000);
         System.out.println("Creating Request Detail");
@@ -326,7 +327,7 @@ public class Main {
         driver.findElement(By.id("quantity")).sendKeys("100");
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime3000);
-        
+
         System.out.println("Request Detail was created successsfully");
 
         driver.findElement(By.id("addCustomer")).click();
@@ -335,22 +336,21 @@ public class Main {
         driver.findElement(By.id("search")).sendKeys("Daniel Campos");
         driver.findElement(By.id("searchSubmit")).click();
         Thread.sleep(delayTime3000);
-        
+
         // Setting the values
         driver.findElement(By.id("quantity")).sendKeys("100");
         driver.findElement(By.id("price")).sendKeys("20");
         driver.findElement(By.id("paid")).sendKeys("100");
         (new Select(driver.findElement(By.id("measureId")))).selectByVisibleText("Measure Test");
         driver.findElement(By.id("observation")).sendKeys("paid 100");
-        
+
         driver.findElement(By.id("addSubmit")).click();
         Thread.sleep(delayTime5000);
         System.out.println("Request Customer was created successsfully");
         driver.findElement(By.id("goRequestRow")).click();
-        
+
         Thread.sleep(delayTime5000);
     }
-    
 
     public static void showAllReports() throws InterruptedException {
         System.out.println("Showing all reports available in the system");
@@ -363,52 +363,52 @@ public class Main {
         driver.get(host + "/reportes_diary");
         System.out.println("Daily Report");
         Thread.sleep(delayTime5000);
-        
+
         driver.get(host + "/result_finance");
         System.out.println("Result finance report");
         Thread.sleep(delayTime5000);
-        
+
         driver.get(host + "/reportes_mayor");
         System.out.println("Mayor Reports");
         Thread.sleep(delayTime5000);
-        
+
         driver.get(host + "/reportes_sumasYSaldos");
         System.out.println("Trial reports");
         Thread.sleep(delayTime5000);
-        
+
         System.out.println("All reports was shown successfully");
     }
-    
+
     public static void selectTr() throws InterruptedException {
         Actions action = new Actions(driver);
         WebElement we = driver.findElement(By.id("measure"));
         action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list"))).click().build().perform();
         Thread.sleep(delayTime2000);
         WebElement baseTable = driver.findElement(By.id("rows"));
-        
+
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
         int quantity = 0;
-        for(WebElement el: tableRows) {
+        for (WebElement el : tableRows) {
             if (el.getText().contains("Measure Test")) {
                 quantity++;
             }
-        }       
-        
+        }
+
         System.out.println(quantity + " Measures to delete");
-        
-        while (quantity > 0){
+
+        while (quantity > 0) {
             quantity--;
             Thread.sleep(delayTime3000);
             action = new Actions(driver);
             we = driver.findElement(By.id("measure"));
             Thread.sleep(delayTime2000);
-            //action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list"))).click().build().perform();
+            // action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list"))).click().build().perform();
             (action.moveToElement(we).moveToElement(driver.findElement(By.id("measure_list")))).click();
             Thread.sleep(delayTime2000);
             baseTable = driver.findElement(By.id("rows"));
             tableRows = baseTable.findElements(By.tagName("tr"));
             boolean deleted = false;
-            for(WebElement el: tableRows) {
+            for (WebElement el : tableRows) {
                 if (!deleted && el.getText().contains("Measure Test")) {
                     deleted = true;
                     List<WebElement> links = el.findElements(By.tagName("a"));
@@ -432,18 +432,18 @@ public class Main {
         action.moveToElement(we).moveToElement(driver.findElement(By.id(module + "_list"))).click().build().perform();
         Thread.sleep(delayTime2000);
         WebElement baseTable = driver.findElement(By.id(tableId));
-        
+
         List<WebElement> tableRows = baseTable.findElements(By.tagName("tr"));
         int quantity = 0;
-        for(WebElement el: tableRows) {
+        for (WebElement el : tableRows) {
             if (el.getText().contains(rowName)) {
                 quantity++;
             }
-        }       
-        
+        }
+
         System.out.println((quantity + 1) + " " + module + "s to delete");
-        
-        while (quantity > 0){
+
+        while (quantity > 0) {
             quantity--;
             Thread.sleep(delayTime3000);
             action = new Actions(driver);
@@ -454,7 +454,7 @@ public class Main {
             baseTable = driver.findElement(By.id(tableId));
             tableRows = baseTable.findElements(By.tagName("tr"));
             boolean deleted = false;
-            for(WebElement el: tableRows) {
+            for (WebElement el : tableRows) {
                 if (!deleted && el.getText().contains(rowName)) {
                     deleted = true;
                     List<WebElement> links = el.findElements(By.tagName("a"));
@@ -472,8 +472,13 @@ public class Main {
         }
     }
 
-	public static void wait5000() throws InterruptedException {
-		Thread.sleep(delayTime5000);
-	}
+    public static void wait5000() throws InterruptedException {
+        Thread.sleep(delayTime5000);
+    }
+
+    public static void setup() throws InterruptedException {
+        loadDriverConfig();
+        histockLogin();
+    }
 
 }
