@@ -25,29 +25,13 @@ public class ProductCreatePage extends CreatePage {
         super.loadElements();
         name = loadById("name");
         cost = loadById("cost");
+        price = loadById("price");
         percent = loadById("percent");
         measureId = loadById("measureId");
         measure = loadById("measure");
-        price = loadById("price");
         currentAmount = loadById("currentAmount");
         description = loadById("description");
         stockLimit = loadById("stockLimit");
-    }
-
-    public String getPrice() {
-        return price.getText();
-    }
-
-    public void setPrice(String price) {
-        this.price.sendKeys(price);
-    }
-
-    public String getMeasure() {
-        return measure.getText();
-    }
-
-    public void setMeasure(String measure) {
-        this.measure.sendKeys(measure);
     }
 
     public void setName(String name) {
@@ -66,6 +50,14 @@ public class ProductCreatePage extends CreatePage {
         this.cost.sendKeys(cost);
     }
 
+    public String getPrice() {
+        return price.getText();
+    }
+
+    public void setPrice(String price) {
+        this.price.sendKeys(price);
+    }
+
     public String getPercent() {
         return percent.getText();
     }
@@ -80,6 +72,14 @@ public class ProductCreatePage extends CreatePage {
 
     public void setMeasureId(String measureId) {
         this.measureId.sendKeys(measureId);
+    }
+
+    public String getMeasure() {
+        return measure.getText();
+    }
+
+    public void setMeasure(String measure) {
+        this.measure.sendKeys(measure);
     }
 
     public String getCurrentAmount() {
