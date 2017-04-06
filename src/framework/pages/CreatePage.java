@@ -38,7 +38,7 @@ public abstract class CreatePage {
     }
 
     public void goToPage() throws InterruptedException {
-        Main.driver.get(Main.host + "/product_add");
+        Main.driver.get(Main.host + getUri());
         Main.wait3000();
     }
 
